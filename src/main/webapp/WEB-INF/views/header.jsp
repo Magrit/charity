@@ -1,5 +1,6 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title>Header</title>
@@ -7,11 +8,24 @@
 <body>
 <header class="header--main-page">
     <nav class="container container--70">
+        <sec:authorize access="isAnonymous()">
         <ul class="nav--actions">
             <li><a href="" class="btn btn--small btn--without-border">Zaloguj</a></li>
             <li><a href="#" class="btn btn--small btn--highlighted">Załóż konto</a></li>
         </ul>
-
+        </sec:authorize>
+        <sec:authorize access="hasRole('USER')">
+            <ul class="nav--actions">
+                <li class="logged-user">
+                    Witaj ${name}
+                    <ul class="dropdown">
+                        <li><a href="#">Profil</a></li>
+                        <li><a href="#">Moje zbiórki</a></li>
+                        <li><a href="#">Wyloguj</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </sec:authorize>
         <ul>
             <li><a href="#" class="btn btn--without-border active">Start</a></li>
             <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
