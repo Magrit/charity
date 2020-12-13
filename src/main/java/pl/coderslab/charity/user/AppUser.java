@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Entity
 @Setter
@@ -21,6 +22,10 @@ public class AppUser {
     private String password;
     private String firstName;
     private String lastName;
-    @Pattern(regexp = "\\+[0-9]{2}[0-9]{9}")
+    @Pattern(regexp = "[0-9]{9}")
     private String phoneNumber;
+
+    @ManyToMany
+    private List<Role> roles;
+
 }
