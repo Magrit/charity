@@ -38,7 +38,6 @@ public class Donation {
     private String street;
     @NotBlank
     private String city;
-    @NotBlank
     @Pattern(regexp = "[0-9]{2}-[0-9]{3}")
     private String zipCode;
 

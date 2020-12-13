@@ -2,6 +2,7 @@ package pl.coderslab.charity.donation;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,8 @@ import pl.coderslab.charity.category.Category;
 import pl.coderslab.charity.category.CategoryRepository;
 import pl.coderslab.charity.institution.Institution;
 import pl.coderslab.charity.institution.InstitutionRepository;
+import pl.coderslab.charity.user.AppUser;
+import pl.coderslab.charity.user.UserService;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -30,22 +33,31 @@ public class DonationController {
         this.institutionRepository = institutionRepository;
     }
 
+    private AppUser getCurrentUser(){
+        return new AppUser();
+    }
+
     @GetMapping("/form")
     public String donationForm(Model model){
         model.addAttribute("categoriesList", categoryRepository.findAll());
         model.addAttribute("institutionsList", institutionRepository.findAll());
+        model.addAttribute("phone", getCurrentUser().getPhoneNumber());
         return "form";
     }
 
-    @PostMapping
-    public String performForm(@RequestParam  List<Category> categories, @RequestParam int bags,
-                              @RequestParam Institution institution, @RequestParam String address,
-                              @RequestParam String city, @RequestParam String zipCode,
-                              @RequestParam @Valid LocalDate pickUpDate,
-                              @RequestParam LocalTime pickUpTime, @RequestParam String pickUpComment){
-        Donation donation = new Donation(bags, categories, institution, address, city, zipCode, pickUpDate, pickUpTime,
-                pickUpComment);
-        donationRepository.save(donation);
-        return "redirect:/";
+    @PostMapping("/form")
+    public String performForm(@RequestParam List<Category> categories, @RequestParam @Valid int bags,
+                              @RequestParam Institution institution, @RequestParam @Valid String address,
+                              @RequestParam @Valid String city, @RequestParam String zipCode,
+                              @RequestParam @Valid String phone, @RequestParam @Valid LocalDate date,
+                              @RequestParam LocalTime time,  String comment, BindingResult result){
+        if (result.hasErrors()){
+            return "redirect:/donation/form";
+        } else {
+            getCurrentUser().setPhoneNumber(phone);
+            Donation donation = new Donation(bags, categories, institution, address, city, zipCode, date, time, comment);
+            donationRepository.save(donation);
+            return "redirect:/";
+        }
     }
 }
