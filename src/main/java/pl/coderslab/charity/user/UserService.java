@@ -22,6 +22,11 @@ public class UserService {
     public void saveUser(AppUser user){
         Role roleUser = roleRepository.findByName("ROLE_USER");
         user.setRoles(Arrays.asList(roleUser));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
 
+    public AppUser findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
