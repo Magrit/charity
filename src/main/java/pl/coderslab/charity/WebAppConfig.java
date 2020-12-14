@@ -11,11 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/403").setViewName("page-error-403");
-    }
-
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource
