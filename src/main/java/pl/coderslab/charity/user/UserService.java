@@ -29,4 +29,8 @@ public class UserService {
     public AppUser findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    public AppUser findByRole(String role) {
+        return userRepository.findByRoles(role);
+    }
 }
