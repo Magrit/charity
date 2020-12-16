@@ -14,10 +14,10 @@ import java.util.Set;
 @Service
 public class SpringDataUserDetailsService implements UserDetailsService{
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
-    public void SpringDataUserDetailsService(UserService userService) {
+    public SpringDataUserDetailsService(UserService userService) {
         this.userService = userService;
     }
 
