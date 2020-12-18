@@ -37,12 +37,12 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Witaj ${user.firstName}!</h1>
+        <h1 class="h3 mb-2 text-gray-800"></h1>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Inni administratorzy</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Użytkownicy</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -54,6 +54,7 @@
                             <th>Email</th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -63,16 +64,18 @@
                             <th>Email</th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        <c:forEach items="${adminsList}" var="admin">
+                        <c:forEach items="${usersList}" var="user">
                             <tr>
-                                <td>${admin.firstName}</td>
-                                <td>${admin.lastName}</td>
-                                <td>${admin.email}</td>
-                                <td><a href="/admin/${admin.id}" class="btn btn-success">Pokaż</a></td>
-                                <td><a href="/admin/delete/${admin.id}" class="btn btn-danger">Usuń</a></td>
+                                <td>${user.firstName}</td>
+                                <td>${user.lastName}</td>
+                                <td>${user.email}</td>
+                                <td><a href="/admin/${user.id}" class="btn btn-success">Pokaż</a></td>
+                                <td><a href="/admin/edit/${user.id}" class="btn btn-success">Edytuj</a></td>
+                                <td><a href="/admin/delete/${user.id}" class="btn btn-danger">Usuń</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

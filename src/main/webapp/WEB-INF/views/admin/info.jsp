@@ -35,52 +35,24 @@
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
-
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Witaj ${user.firstName}!</h1>
-
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Inni administratorzy</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th>Imię</th>
-                            <th>Nazwisko</th>
-                            <th>Email</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>Imię</th>
-                            <th>Nazwisko</th>
-                            <th>Email</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </tfoot>
-                        <tbody>
-                        <c:forEach items="${adminsList}" var="admin">
-                            <tr>
-                                <td>${admin.firstName}</td>
-                                <td>${admin.lastName}</td>
-                                <td>${admin.email}</td>
-                                <td><a href="/admin/${admin.id}" class="btn btn-success">Pokaż</a></td>
-                                <td><a href="/admin/delete/${admin.id}" class="btn btn-danger">Usuń</a></td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">${userInfo.firstName} ${userInfo.lastName}</h6>
+                    </div>
+                    <div class="card-body row">
+                        <div class="col-lg-11">
+                            email: ${userInfo.email} <br/>
+                            nr tel: ${userInfo.phoneNumber}
+                        </div>
+                        <div class="col-lg-1">
+                            <a href="/admin/delete/${userInfo.id}" class="btn btn-danger">Usuń</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
     <!-- /.container-fluid -->
 
@@ -111,7 +83,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="/logout">Logout</a>
             </div>
         </div>
     </div>

@@ -49,30 +49,27 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Imię</th>
-                            <th>Nazwisko</th>
-                            <th>Email</th>
+                            <th>Nazwa</th>
+                            <th>Opis</th>
                             <th></th>
                             <th></th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Imię</th>
-                            <th>Nazwisko</th>
-                            <th>Email</th>
+                            <th>Nazwa</th>
+                            <th>Opis</th>
                             <th></th>
                             <th></th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        <c:forEach items="${adminsList}" var="admin">
+                        <c:forEach items="${institutionsList}" var="institution">
                             <tr>
-                                <td>${admin.firstName}</td>
-                                <td>${admin.lastName}</td>
-                                <td>${admin.email}</td>
-                                <td><a href="/admin/${admin.id}" class="btn btn-success">Pokaż</a></td>
-                                <td><a href="/admin/delete/${admin.id}" class="btn btn-danger">Usuń</a></td>
+                                <td>${institution.name}</td>
+                                <td>${institution.description}</td>
+                                <td><a href="/admin/institution/${institution.id}" class="btn btn-success">Pokaż</a></td>
+                                <td><a href="/admin/institution/delete/${institution.id}" class="btn btn-danger">Usuń</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
