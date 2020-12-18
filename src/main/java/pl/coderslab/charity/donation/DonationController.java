@@ -9,6 +9,7 @@ import pl.coderslab.charity.category.CategoryRepository;
 import pl.coderslab.charity.institution.Institution;
 import pl.coderslab.charity.institution.InstitutionRepository;
 import pl.coderslab.charity.user.AppUser;
+import pl.coderslab.charity.user.UserService;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -22,16 +23,14 @@ public class DonationController {
     private final DonationRepository donationRepository;
     private final CategoryRepository categoryRepository;
     private final InstitutionRepository institutionRepository;
+    private final UserService userService;
 
     public DonationController(DonationRepository donationRepository, CategoryRepository categoryRepository,
-                              InstitutionRepository institutionRepository) {
+                              InstitutionRepository institutionRepository, UserService userService) {
         this.donationRepository = donationRepository;
         this.categoryRepository = categoryRepository;
         this.institutionRepository = institutionRepository;
-    }
-
-    private AppUser getCurrentUser() {
-        return new AppUser();
+        this.userService = userService;
     }
 
     @ModelAttribute(name = "categoriesList")
@@ -47,7 +46,7 @@ public class DonationController {
     @GetMapping("/form")
     public String donationForm(Model model) {
         model.addAttribute("donation", new Donation());
-        model.addAttribute("phone", getCurrentUser().getPhoneNumber());
+        model.addAttribute("phone", userService.getCurrentUser().getPhoneNumber());
         return "form";
     }
 
@@ -60,11 +59,13 @@ public class DonationController {
         if (result.hasErrors()) {
             return "/form";
         } else {
-            getCurrentUser().setPhoneNumber(phone);
+            AppUser currentUser = userService.getCurrentUser();
+            currentUser.setPhoneNumber(phone);
             donation.setCategories(categoryRepository.findAllById(categories));
             donation.setPickUpTime(LocalTime.parse(time));
             donation.setPickUpDate(LocalDate.parse(date));
             donation.setInstitution(institutionRepository.getOne(institution));
+            donation.setUser(currentUser);
             donationRepository.save(donation);
             return "redirect:/";
         }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.charity.category.Category;
 import pl.coderslab.charity.institution.Institution;
+import pl.coderslab.charity.user.AppUser;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -30,7 +31,7 @@ public class Donation {
     @NotNull(message = "{radiobutton.notNull}")
     private List<Category> categories;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @NotNull(message = "{radiobutton.notNull}")
     private Institution institution;
 
@@ -46,5 +47,8 @@ public class Donation {
     private LocalDate pickUpDate;
     private LocalTime pickUpTime;
     private String pickUpComment;
+
+    @ManyToOne
+    private AppUser user;
 
 }
