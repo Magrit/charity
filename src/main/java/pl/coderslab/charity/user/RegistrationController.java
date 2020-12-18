@@ -29,7 +29,7 @@ public class RegistrationController {
         if (result.hasErrors() || !appUser.getPassword().equals(confirmPassword)) {
             return "/register";
         }
-        userService.saveUser(appUser);
+        userService.saveNewUser(appUser);
         attributes.addFlashAttribute("message", "Pomyślnie zarejestrowano nowego użytkownika");
         return "redirect:/";
     }

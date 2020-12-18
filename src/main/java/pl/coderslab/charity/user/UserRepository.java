@@ -4,9 +4,11 @@ import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends JpaRepository<AppUser, User> {
-    AppUser findByEmail(String email);
+import java.util.List;
 
-    AppUser findByRoles(String role);
+@Repository
+public interface UserRepository extends JpaRepository<AppUser, Long> {
+    AppUser findByEmail(String email);
+    List<AppUser> findAllByRoles(Role role);
+
 }
