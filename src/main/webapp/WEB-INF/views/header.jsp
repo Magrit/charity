@@ -24,17 +24,25 @@
                     <sec:authorize access="hasRole('ADMIN')">
                         <li><a href="/admin">Wyświetl użytkowników</a></li>
                     </sec:authorize>
-                    <li><a href="/logout">Wyloguj</a></li>
+                    <li>
+                        <form method="post" action="/logout">
+                            <div>
+                                <input type="submit" class="btn btn--small btn--without-border"
+                                       value="Wyloguj">
+                            </div>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
+                    </li>
                 </ul>
             </li>
         </ul>
     </sec:authorize>
     <ul>
         <li><a href="/" class="btn btn--without-border active">Start</a></li>
-        <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
-        <li><a href="#" class="btn btn--without-border">O nas</a></li>
-        <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
-        <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
+        <li><a href="/#specs" class="btn btn--without-border">O co chodzi?</a></li>
+        <li><a href="/#about" class="btn btn--without-border">O nas</a></li>
+        <li><a href="/#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
+        <li><a href="/#contact" class="btn btn--without-border">Kontakt</a></li>
     </ul>
 </nav>
 

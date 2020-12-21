@@ -63,7 +63,7 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form:form action="/donation/form" method="post" modelAttribute="donation">
+        <form:form id="form" action="/donation/form" method="post" modelAttribute="donation">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button id="first" type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
 
@@ -95,7 +95,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <form:input path="quantity"/> <br/>
+                        <form:input path="quantity" id="quantity"/> <br/>
                     </label>
                     <label>
                         <form:errors path="quantity"/>
@@ -104,7 +104,7 @@
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button id="second" type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
 
@@ -133,7 +133,7 @@
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button id="third" type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
 
@@ -145,7 +145,7 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <form:input path="street"/>
+                            <label> Ulica <form:input path="street" id="street"/>
                             </label>
                             <label>
                                 <form:errors path="street"/>
@@ -154,7 +154,7 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Miasto <form:input path="city"/>
+                                Miasto <form:input path="city" id="city"/>
                             </label>
                             <label>
                                 <form:errors path="city"/>
@@ -163,7 +163,7 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <form:input path="zipCode"/>
+                                Kod pocztowy <form:input path="zipCode" id="zipCode"/>
                             </label>
                             <label>
                                 <form:errors path="zipCode"/>
@@ -172,7 +172,7 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <input type="text" name="phone">${phone}</label>
+                                Numer telefonu <input type="text" id="phone" name="phone" value="${phone}">
                             </label>
                         </div>
                     </div>
@@ -181,7 +181,10 @@
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
                             <label>
-                                Data <input type="date" name="date"/>
+                                Data <form:input path="pickUpDate"/>
+                            </label>
+                            <label>
+                                <span>Data w formacie YYYY-MM-DD</span>
                             </label>
                             <label>
                                 <form:errors path="pickUpDate"/>
@@ -189,20 +192,28 @@
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <input type="time" name="time"/> </label>
+                            <label>
+                                Godzina <form:input path="pickUpTime"/>
+                            </label>
+                            <label>
+                                <span>Czas w formacie hh-mm</span>
+                            </label>
+                            <label>
+                                <form:errors path="pickUpTime"/>
+                            </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <form:textarea path="pickUpComment" rows="5"/>
+                                <form:textarea path="pickUpComment" rows="5" id="comment"/>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button id="last" type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
 
@@ -263,5 +274,6 @@
 <%@include file="footer.jsp" %>
 
 <script src="../../resources/js/app.js"></script>
+<script src="../../resources/js/donationForm.js"></script>
 </body>
 </html>
