@@ -71,7 +71,7 @@
                 <c:forEach items="${categoriesList}" var="category">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <input type="checkbox" name="categories" value="${category.id}">
+                            <input id="categories" type="checkbox" name="categories" value="${category.id}">
                             <span class="checkbox"></span>
                             <span class="description">${category.name}</span>
                         </label>
@@ -115,7 +115,7 @@
                 <c:forEach items="${institutionsList}" var="institution">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <input type="radio" name="institution" value="${institution.id}"/>
+                            <input type="radio" name="institution" id="institutions" value="${institution.id}"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
                                 <div class="title">${institution.name}</div>
@@ -181,7 +181,7 @@
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
                             <label>
-                                Data <form:input path="pickUpDate"/>
+                                Data <form:input path="pickUpDate" id="date"/>
                             </label>
                             <label>
                                 <span>Data w formacie YYYY-MM-DD</span>
@@ -193,7 +193,7 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Godzina <form:input path="pickUpTime"/>
+                                Godzina <form:input path="pickUpTime" id="time"/>
                             </label>
                             <label>
                                 <span>Czas w formacie hh-mm</span>
@@ -224,45 +224,27 @@
                 <div class="summary">
                     <div class="form-section">
                         <h4>Oddajesz:</h4>
-                        <ul>
-                            <li>
-                                <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span>
-                            </li>
-
-                            <li>
-                                <span class="icon icon-hand"></span>
-                                <span class="summary--text"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span>
-                            </li>
+                        <ul id="firstUl">
                         </ul>
                     </div>
 
                     <div class="form-section form-section--columns">
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
-                            <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                            <ul id="secondUl">
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
-                            <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                            <ul id="thirdUl">
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn prev-step">Wstecz</button>
+                    <button id="prev" type="button" class="btn prev-step">Wstecz</button>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <button type="submit" class="btn">Potwierdzam</button>
                 </div>

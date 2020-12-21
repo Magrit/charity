@@ -21,7 +21,7 @@ public class AppUser {
     private long id;
 
     @Column(unique = true)
-    @NotBlank(message = "{not_blank}")
+    @NotBlank(message = "{email.not_blank}")
     @Email(message = "{email.correctness}")
     private String email;
 

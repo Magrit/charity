@@ -1,17 +1,18 @@
 package pl.coderslab.charity.user;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.coderslab.charity.donation.Donation;
 import pl.coderslab.charity.donation.DonationRepository;
 import pl.coderslab.charity.institution.InstitutionRepository;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
@@ -21,12 +22,14 @@ public class AdminController {
     private final UserService userService;
     private final InstitutionRepository institutionRepository;
     private final DonationRepository donationRepository;
+    private final Validator validator;
 
     public AdminController(UserService userService, InstitutionRepository institutionRepository,
-                           DonationRepository donationRepository) {
+                           DonationRepository donationRepository, @Qualifier("getValidator") Validator validator) {
         this.userService = userService;
         this.institutionRepository = institutionRepository;
         this.donationRepository = donationRepository;
+        this.validator = validator;
     }
 
     @ModelAttribute(name = "user")
@@ -90,4 +93,47 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    @GetMapping("/profile")
+    public String adminProfile(Model model){
+        model.addAttribute("currentUser", userService.getCurrentUser());
+        return "admin/profile";
+    }
+
+    @GetMapping("/profile/edit")
+    public String changeProfile(Model model){
+        model.addAttribute("user", userService.getCurrentUser());
+        return "admin/profile-edit";
+    }
+
+    @PostMapping("/profile/edit")
+    public String performChanges(@RequestParam(required = false) String firstName,
+                                 @RequestParam(required = false) String lastName,
+                                 @RequestParam String email, @RequestParam String phoneNumber, Model model) {
+        AppUser currentUser = userService.getCurrentUser();
+        currentUser.setFirstName(firstName);
+        currentUser.setLastName(lastName);
+        currentUser.setEmail(email);
+        currentUser.setPhoneNumber(phoneNumber);
+        Set<ConstraintViolation<AppUser>> violations = validator.validate(currentUser);
+        if (violations.isEmpty()){
+            userService.saveUser(currentUser);
+            return "redirect:/admin/profile";
+        }
+        model.addAttribute("errors", violations);
+        return "admin/profile-edit";
+    }
+
+    @GetMapping("/password/edit")
+    public String changePassword(){
+        return "/admin/password-edit";
+    }
+
+    @PostMapping("/password/edit")
+    public String performNewPassword(@RequestParam String password, @RequestParam String confirmPassword){
+        if (password.equals(confirmPassword)){
+            userService.changePassword(userService.getCurrentUser(), password);
+            return "redirect:/admin/profile";
+        }
+        return "/admin/password-edit";
+    }
 }
