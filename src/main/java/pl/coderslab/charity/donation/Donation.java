@@ -45,6 +45,8 @@ public class Donation {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Future(message = "{date.future}")
     private LocalDate pickUpDate;
+    @DateTimeFormat(pattern = "HH:mm")
+    @NotNull(message = "{time.notNull}")
     private LocalTime pickUpTime;
     private String pickUpComment;
 

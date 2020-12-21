@@ -1,5 +1,6 @@
 package pl.coderslab.charity.donation;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,10 +12,13 @@ import pl.coderslab.charity.institution.InstitutionRepository;
 import pl.coderslab.charity.user.AppUser;
 import pl.coderslab.charity.user.UserService;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
+import javax.validation.Validator;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/donation")
@@ -43,31 +47,36 @@ public class DonationController {
         return institutionRepository.findAll();
     }
 
+    @ModelAttribute(name = "phone")
+    public String phoneNumber() {
+        return userService.getCurrentUser().getPhoneNumber();
+    }
+
     @GetMapping("/form")
     public String donationForm(Model model) {
         model.addAttribute("donation", new Donation());
-        model.addAttribute("phone", userService.getCurrentUser().getPhoneNumber());
         return "form";
     }
 
     @PostMapping("/form")
     public String performForm(@RequestParam(required = false) List<Long> categories,
                               @RequestParam(required = false) Long institution,
-                              @RequestParam(required = false) String phone, @RequestParam String date,
-                              @RequestParam String time, @Valid @ModelAttribute("donation") Donation donation,
+                              @RequestParam(required = false) String phone, @Valid Donation donation,
                               BindingResult result) {
         if (result.hasErrors()) {
             return "/form";
-        } else {
-            AppUser currentUser = userService.getCurrentUser();
-            currentUser.setPhoneNumber(phone);
-            donation.setCategories(categoryRepository.findAllById(categories));
-            donation.setPickUpTime(LocalTime.parse(time));
-            donation.setPickUpDate(LocalDate.parse(date));
-            donation.setInstitution(institutionRepository.getOne(institution));
-            donation.setUser(currentUser);
-            donationRepository.save(donation);
-            return "redirect:/";
         }
+        AppUser currentUser = userService.getCurrentUser();
+        currentUser.setPhoneNumber(phone);
+        donation.setCategories(categoryRepository.findAllById(categories));
+        donation.setInstitution(institutionRepository.getOne(institution));
+        donation.setUser(currentUser);
+        donationRepository.save(donation);
+        return "redirect:/donation/confirm";
+    }
+
+    @GetMapping("/confirm")
+    public String formConformation() {
+        return "form-confirmation";
     }
 }

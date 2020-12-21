@@ -32,7 +32,7 @@
 
                     Ilość worków: ${donation.quantity} <br/>
                     Data: ${donation.pickUpDate} <br/>
-                    <a href="/donation/${donation.id}" class="btn">Pokaż</a> <br/><br/>
+                    <a href="/donation/info/${donation.id}" class="btn">Pokaż</a> <br/><br/>
                 </h1>
             </c:forEach>
     </div>

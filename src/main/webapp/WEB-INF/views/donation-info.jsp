@@ -23,7 +23,7 @@
     <div class="container">
         <h2>Szczegóły darowizny:</h2>
         <div class="summary">
-            <h4>
+            <h1>
                 Organizacja:
                 <c:set value="${donation.institution}" var="institution"/>
                 ${institution.name} <br/>
@@ -35,7 +35,7 @@
                 ${donation.zipCode} ${donation.city} <br/>
                 Data wydania: ${donation.pickUpDate} ${donation.pickUpTime} <br/>
                 Dodatkowe informacje: ${donation.pickUpComment}
-            </h4>
+            </h1>
         </div>
     </div>
 </section>
