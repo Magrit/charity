@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.coderslab.charity.donation.Donation;
+import pl.coderslab.charity.donation.DonationRepository;
 import pl.coderslab.charity.institution.InstitutionRepository;
 
 import java.util.List;
@@ -18,10 +20,13 @@ public class AdminController {
 
     private final UserService userService;
     private final InstitutionRepository institutionRepository;
+    private final DonationRepository donationRepository;
 
-    public AdminController(UserService userService, InstitutionRepository institutionRepository) {
+    public AdminController(UserService userService, InstitutionRepository institutionRepository,
+                           DonationRepository donationRepository) {
         this.userService = userService;
         this.institutionRepository = institutionRepository;
+        this.donationRepository = donationRepository;
     }
 
     @ModelAttribute(name = "user")
@@ -43,6 +48,8 @@ public class AdminController {
                 .collect(Collectors.toList());
         if (roleAdmin.size() == 0){
             userService.deleteUser(userById);
+            List<Donation> allByUser = donationRepository.findAllByUser(userById);
+            donationRepository.deleteAll(allByUser);
             return "redirect:/admin";
         } else if (userService.countAllByRole("ROLE_ADMIN") > 1) {
             userService.deleteUser(userById);
