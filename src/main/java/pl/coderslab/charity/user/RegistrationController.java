@@ -31,6 +31,6 @@ public class RegistrationController {
         }
         userService.saveNewUser(appUser);
         attributes.addFlashAttribute("message", "Pomyślnie zarejestrowano nowego użytkownika");
-        return "redirect:/";
+        return "redirect:/login";
     }
 }
