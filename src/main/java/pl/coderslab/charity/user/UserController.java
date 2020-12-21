@@ -51,10 +51,10 @@ public class UserController {
         Set<ConstraintViolation<AppUser>> violations = validator.validate(currentUser);
         if (violations.isEmpty()) {
             userService.saveUser(currentUser);
-            return "redirect:/admin/profile";
+            return "redirect:/profile";
         }
         model.addAttribute("errors", violations);
-        return "admin/profile-edit";
+        return "/edit-profile";
     }
 
     @GetMapping("/donation")
