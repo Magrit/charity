@@ -42,7 +42,7 @@ public class UserController {
         currentUser.setEmail(email);
         currentUser.setPhoneNumber(phoneNumber);
         userService.saveUser(currentUser);
-        return "redireect:/profile";
+        return "redirect:/profile";
     }
 
     @GetMapping("/donation")
@@ -52,9 +52,23 @@ public class UserController {
         return "donation";
     }
 
-    @GetMapping("/donation/{id}")
-    public String donation(@PathVariable long id, Model model){
+    @GetMapping("/donation/info/{id}")
+    public String donationInfo(@PathVariable long id, Model model){
         model.addAttribute("donation", donationRepository.getOne(id));
         return "donation-info";
+    }
+
+    @GetMapping("/profile/password")
+    public String changePassword(){
+        return "change-password";
+    }
+
+    @PostMapping("/profile/password")
+    public String performNewPassword(@RequestParam String password, @RequestParam String confirmPassword){
+        if (password.equals(confirmPassword)){
+            userService.changePassword(userService.getCurrentUser(), password);
+            return "redirect:/profile";
+        }
+        return "change-password";
     }
 }
