@@ -19,4 +19,4 @@ Project is created with:
 * JSP files
 
 ## Status
-Project is still developed. I plan to add a few tests and function sending email to confirm registration.
+Project is still in develop stage. I plan to add a few tests and function sending email to confirm registration.
