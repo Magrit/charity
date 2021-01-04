@@ -1,12 +1,22 @@
-<img alt="Logo" src="http://coderslab.pl/svg/logo-coderslab.svg" width="400">
+# Charity project
+Web app serves to charity donation created with Java.
 
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Status](#status)
 
-Przed przystąpieniem do pracy  przeczytaj poniższe wskazówki.
-## Jak zacząć?
+## General info
+Web app with a platform for people who have unnecessary items and want to donate it to charity foundation. Create an account to use it. Normal user may find a trusted institution from database and donate items using form. Admin manages data: charity foundations, other users and donations.   
 
-1. Zaimportuj projekt jako projekt `Maven`, wg poniższych wskazówek:
+## Technologies
+Project is created with:
+* Java version: 8
+* Maven version: 3.6.3
+* Spring Boot version: 2.1.4
+* Spring Security
+* Hibernate ORM version: 
+* JSP files
 
-	* W `IntelliJ` wybieramy: `File –> New –> Project from Existing Sources...`
-	* Wskazujemy lokalizację katalogu ze sklonowanym projektem i zatwierdzamy.
-	* Następnie w nowym oknie wybieramy: `Import project from external model` i wskazujemy `Maven`
-	* Wybieramy kolejno opcje: `Next –> Next –> Next –> Finish`
+## Status
+Project is still developed. I plan to add a few tests and function sending email to confirm registration.
