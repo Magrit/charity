@@ -1,7 +1,8 @@
-package pl.coderslab.charity.user;
+package pl.coderslab.charity.user.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import pl.coderslab.charity.user.AppUser;
 
 import java.util.Collection;
 

@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.coderslab.charity.donation.Donation;
 import pl.coderslab.charity.donation.DonationRepository;
 import pl.coderslab.charity.institution.InstitutionRepository;
+import pl.coderslab.charity.user.security.Role;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;

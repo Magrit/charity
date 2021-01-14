@@ -9,7 +9,6 @@ import pl.coderslab.charity.donation.DonationRepository;
 import pl.coderslab.charity.institution.Institution;
 import pl.coderslab.charity.institution.InstitutionRepository;
 import pl.coderslab.charity.user.AppUser;
-import pl.coderslab.charity.user.Role;
 import pl.coderslab.charity.user.UserService;
 
 import java.util.List;

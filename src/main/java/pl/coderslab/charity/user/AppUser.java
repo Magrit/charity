@@ -3,6 +3,7 @@ package pl.coderslab.charity.user;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.coderslab.charity.user.security.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

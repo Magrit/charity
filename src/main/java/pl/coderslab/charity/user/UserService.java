@@ -3,6 +3,9 @@ package pl.coderslab.charity.user;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.coderslab.charity.user.security.CurrentUser;
+import pl.coderslab.charity.user.security.Role;
+import pl.coderslab.charity.user.security.RoleRepository;
 
 import java.util.Arrays;
 import java.util.List;

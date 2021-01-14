@@ -1,4 +1,4 @@
-package pl.coderslab.charity.user;
+package pl.coderslab.charity.user.security;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

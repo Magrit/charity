@@ -1,8 +1,8 @@
 package pl.coderslab.charity.user;
 
-import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import pl.coderslab.charity.user.security.Role;
 
 import java.util.List;
 
