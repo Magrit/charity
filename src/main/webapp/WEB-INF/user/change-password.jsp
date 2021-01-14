@@ -11,28 +11,25 @@
   </head>
   <body>
   <header>
-    <%@include file="header.jsp"%>
+    <%@include file="../home/header.jsp"%>
   </header>
 
     <section class="login-page">
-      <h2>Zaloguj się</h2>
-      <form method="post" action="/login">
+      <h2>Zmień hasło</h2>
+      <form method="post" action="/profile/password">
         <div class="form-group">
-          <input type="email" name="username" placeholder="Email" />
+          <input type="password" name="password" placeholder="Nowe hasło" />
         </div>
         <div class="form-group">
-          <input type="password" name="password" placeholder="Hasło" />
-          <a href="/reset-password" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
+          <input type="password" name="confirmPassword" placeholder="Powtórz nowe hasło" />
         </div>
-
         <div class="form-group form-group--buttons">
-          <a href="/registration" class="btn btn--without-border">Załóż konto</a>
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-          <button class="btn" type="submit">Zaloguj się</button> 
+          <button class="btn" type="submit">Zapisz</button>
         </div>
       </form>
     </section>
 
-    <%@include file="footer.jsp"%>>
+    <%@include file="../home/footer.jsp"%>>
   </body>
 </html>

@@ -12,7 +12,7 @@
 </head>
 <body>
 <header>
-    <%@include file="header.jsp" %>
+    <%@include file="../home/header.jsp" %>
 </header>
 <section class="login-page">
     <h2>Edytuj dane</h2>
@@ -44,6 +44,6 @@
     </form>
 </section>
 
-<%@include file="footer.jsp" %>
+<%@include file="../home/footer.jsp" %>
 </body>
 </html>

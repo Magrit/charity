@@ -10,7 +10,7 @@
 </head>
 <body>
 <header class="header--form-page">
-    <%@include file="header.jsp" %>
+    <%@include file="../home/header.jsp" %>
 
     <div class="slogan container container--90">
         <h2>
@@ -40,7 +40,7 @@
     </div>
 </section>
 
-<%@include file="footer.jsp" %>
+<%@include file="../home/footer.jsp" %>
 
 <script src="../../resources/js/app.js"></script>
 </body>

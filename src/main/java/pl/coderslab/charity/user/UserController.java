@@ -20,7 +20,8 @@ public class UserController {
     private final DonationRepository donationRepository;
     private final Validator validator;
 
-    public UserController(UserService userService, DonationRepository donationRepository, @Qualifier("getValidator") Validator validator) {
+    public UserController(UserService userService, DonationRepository donationRepository,
+                          @Qualifier("getValidator") Validator validator) {
         this.userService = userService;
         this.donationRepository = donationRepository;
         this.validator = validator;
@@ -29,14 +30,14 @@ public class UserController {
     @GetMapping("/profile")
     public String profileInfo(Model model) {
         model.addAttribute("user", userService.getCurrentUser());
-        return "profile";
+        return "user/profile";
     }
 
     @GetMapping("/profile/edit")
     public String profileEdit(Model model) {
         AppUser user = userService.getCurrentUser();
         model.addAttribute("user", user);
-        return "edit-profile";
+        return "user/edit-profile";
     }
 
     @PostMapping("/profile/edit")
@@ -54,25 +55,25 @@ public class UserController {
             return "redirect:/profile";
         }
         model.addAttribute("errors", violations);
-        return "/edit-profile";
+        return "user/edit-profile";
     }
 
     @GetMapping("/donation")
     public String donationsInfo(Model model) {
         AppUser currentUser = userService.getCurrentUser();
         model.addAttribute("donationsList", donationRepository.findAllByUser(currentUser));
-        return "donation";
+        return "user/donation";
     }
 
     @GetMapping("/donation/info/{id}")
     public String donationInfo(@PathVariable long id, Model model) {
         model.addAttribute("donation", donationRepository.getOne(id));
-        return "donation-info";
+        return "user/donation-info";
     }
 
     @GetMapping("/profile/password")
     public String changePassword() {
-        return "change-password";
+        return "user/change-password";
     }
 
     @PostMapping("/profile/password")
@@ -81,6 +82,6 @@ public class UserController {
             userService.changePassword(userService.getCurrentUser(), password);
             return "redirect:/profile";
         }
-        return "change-password";
+        return "user/change-password";
     }
 }

@@ -55,7 +55,7 @@ public class DonationController {
     @GetMapping("/form")
     public String donationForm(Model model) {
         model.addAttribute("donation", new Donation());
-        return "form";
+        return "user/form";
     }
 
     @PostMapping("/form")
@@ -77,6 +77,6 @@ public class DonationController {
 
     @GetMapping("/confirm")
     public String formConformation() {
-        return "form-confirmation";
+        return "user/form-confirmation";
     }
 }
